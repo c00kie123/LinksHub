@@ -22,6 +22,7 @@ export const SideNavbar = () => {
           }`
         )}
      >
+      <div className="flex justify-between">
       <div className={classNames(isDarkMode ? "dark-mode" : "light-mode")}>
         <h1 className="text-3xl font-bold mb-4">
           <span className="border-b-4 border-violet-500 text-violet-200">
@@ -92,4 +93,3 @@ export const SideNavbar = () => {
   );
 };
 
-export default LightDarkModeToggle;
