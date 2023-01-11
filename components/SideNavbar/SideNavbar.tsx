@@ -5,30 +5,43 @@ import { SideNavbarElement } from "./SideNavbarElement";
 
 export const SideNavbar = () => {
   const [isSidebarActive, setIsSidebarActive] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   const toggleSidebar = () => {
     setIsSidebarActive((prev) => !prev);
   };
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
+  };
 
   return (
-    <div className={`lg:w-1/5 bg-base-300 p-4 lg:min-h-screen`}>
-      <div className="flex justify-between">
+      <div
+          className={classNames(
+          `lg:w-1/5 bg-base-300 p-4 lg:min-h-screen ${
+            isDarkMode ? "dark-mode" : "light-mode"
+          }`
+        )}
+     >
+      <div className={classNames(isDarkMode ? "dark-mode" : "light-mode")}>
         <h1 className="text-3xl font-bold mb-4">
           <span className="border-b-4 border-violet-500 text-violet-200">
             Links
           </span>
           <span className="text-violet-500">Hub</span>
         </h1>
-
+      <button className="mode-toggle" onClick={toggleDarkMode}>
+          {isDarkMode ? "Light Mode" : "Dark Mode"}
+      </button>
+        
         <label className="btn btn-circle swap swap-rotate lg:hidden">
           <input
             type="checkbox"
             onClick={toggleSidebar}
-            className="lg:hidden"
+            className=className={classNames(isDarkMode ? "dark-mode-checkbox" : "light-mode-checkbox")}
           />
 
           <svg
-            className="swap-off fill-current"
+            className={classNames("swap-off fill-current", isDarkMode ? "dark-mode-svg" : "light-mode-svg")}
             xmlns="http://www.w3.org/2000/svg"
             width="32"
             height="32"
@@ -38,7 +51,7 @@ export const SideNavbar = () => {
           </svg>
 
           <svg
-            className="swap-on fill-current"
+            className={classNames("swap-on fill-current", isDarkMode ? "dark-mode-svg" : "light-mode-svg")}
             xmlns="http://www.w3.org/2000/svg"
             width="32"
             height="32"
@@ -47,6 +60,9 @@ export const SideNavbar = () => {
             <polygon points="400 145.49 366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49" />
           </svg>
         </label>
+        <button className={classNames("mode-toggle", isDarkMode ? "dark-mode-btn" : "light-mode-btn")} onClick={toggleDarkMode}>
+          {isDarkMode ? "Light Mode" : "Dark Mode"}
+        </button>
       </div>
       <div
         className={classNames(
@@ -54,7 +70,10 @@ export const SideNavbar = () => {
           isSidebarActive ? "block" : "hidden"
         )}
       >
-        <div className="py-4 flex flex-col justify-center gap-8">
+        <div className={classNames("py-4 flex flex-col justify-center gap-8", isDarkMode ? "dark-mode" : "light-mode")}>
+          <button className={classNames("mode-toggle", isDarkMode ? "dark-mode-btn" : "light-mode-btn")} onClick={toggleDarkMode}>
+          { isDarkMode ? "Light Mode" : "Dark Mode"}
+          </button>
           {sidebarData.map((item, index) => {
             return (
               <div key={index}>
@@ -72,3 +91,5 @@ export const SideNavbar = () => {
     </div>
   );
 };
+
+export default LightDarkModeToggle;
